@@ -1,3 +1,10 @@
+Switched to opengl + test build app for android
+
+
+
+
+
+
 # uMario_Jakowski
 uMario C++/SDL2 Game by Łukasz Jakowski
 

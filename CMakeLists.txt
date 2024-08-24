@@ -21,15 +21,17 @@ endif()
 find_package(SDL2 REQUIRED)
 find_package(SDL2_Image REQUIRED)
 find_package(SDL2_Mixer REQUIRED)
-include_directories(${SDL2_INCLUDE_DIR} ${SDL2_IMAGE_INCLUDE_DIR} ${SDL2_MIXER_INCLUDE_DIR})
+find_package(GLESv2 REQUIRED)
+include_directories(${SDL2_INCLUDE_DIR} ${SDL2_IMAGE_INCLUDE_DIR} ${SDL2_MIXER_INCLUDE_DIR} ${GLESv2_INCLUDE_DIR})
 
-file(COPY uNext/files DESTINATION .)
+file(COPY uNext/images DESTINATION .)
+file(COPY uNext/sounds DESTINATION .)
 
 include_directories(uNext)
 
 file(GLOB_RECURSE uMario_SOURCES "uNext/*.cpp")
 add_executable (uMario ${uMario_SOURCES})
 
-target_link_libraries(uMario ${SDL2_LIBRARY} ${SDL2_IMAGE_LIBRARY} ${SDL2_MIXER_LIBRARY})
+target_link_libraries(uMario ${SDL2_LIBRARY} ${SDL2_IMAGE_LIBRARY} ${SDL2_MIXER_LIBRARY} ${GLESv2_LIBRARY})
 
 install(TARGETS uMario RUNTIME DESTINATION ${BIN_DIR})

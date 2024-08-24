@@ -5,59 +5,73 @@
 
 #include "Map.h"
 
-class CCore
-{
-private:
-	SDL_Window* window;
-	SDL_Renderer* rR;
-	SDL_Event* mainEvent;
+class CCore {
+   private:
+    // SDL_Window* window;
+    // SDL_Renderer* rR;
+    SDL_Event* mainEvent;
+    // SDL_Surface* mainSurface;
+    unsigned int gl_texture;
 
-	// ----- FPS -----
+    enum {
+        tks_up = 1,
+        tks_down = 2,
+        tks_left = 4,
+        tks_right = 8,
+        tks_fire = 16,
+    };
+    unsigned touchKeysMask;
 
-	long frameTime;
-	static const int MIN_FRAME_TIME = 16;
+    // ----- FPS -----
 
-	unsigned long lFPSTime;
-	int iNumOfFPS, iFPS;
+    long frameTime;
+    static const int MIN_FRAME_TIME = 16;
 
-	// ----- FPS -----
+    unsigned long lFPSTime;
+    int iNumOfFPS, iFPS;
 
-	// ----- INPUT
-	static bool movePressed, keyMenuPressed, keyS, keyW, keyA, keyD, keyShift;
+    // ----- FPS -----
 
-	static bool keyAPressed, keyDPressed;
-	// ----- true = RIGHT, false = LEFT
-	bool firstDir;
+    // ----- INPUT
+    static bool movePressed, keyMenuPressed, keyDown, keyW, keyA, keyD, keyFire;
 
-	// ----- INPUT
+    static bool keyLeftPressed, keyRightPressed;
+    // ----- true = RIGHT, false = LEFT
+    bool firstDir;
 
-	static Map* oMap;
+    // ----- INPUT
 
-	// ----- Methods
+    static Map* oMap;
 
-	void Input();
-	void MouseInput();
-	void InputPlayer();
-	void InputMenu();
-public:
-	CCore(void);
-	~CCore(void);
+    // ----- Methods
 
-	static bool quitGame;
+    void makeKeysPR(unsigned keys_mask, bool press);
+    void checkFingers();
 
-	void mainLoop();
+    void Input();
+    void MouseInput();
+    void InputPlayer();
+    void InputMenu();
 
-	void Update();
-	void Draw();
+   public:
+    CCore();
+    ~CCore();
 
-	void resetMove();
-	static void resetKeys();
+    static bool quitGame;
 
-	static bool mouseLeftPressed, mouseRightPressed;
-	static int mouseX, mouseY;
-	
-	/* ----- get & set ----- */
-	static Map* getMap();
+    void mainLoop();
+
+    void Update();
+    void Draw();
+
+    void resetMove();
+    static void resetKeys();
+
+    static bool mouseLeftPressed, mouseRightPressed;
+    static int mouseX, mouseY;
+
+    /* ----- get & set ----- */
+    static Map* getMap();
 };
 
 #endif
